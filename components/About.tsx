@@ -4,7 +4,7 @@ import { SKILLS } from '../constants';
 import { SectionTitle } from './SectionTitle';
 import { motion } from 'framer-motion';
 import { Button } from './Button';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, Code2, BarChart3, Heart } from 'lucide-react';
 import { ViewType } from '../types';
 
 interface AboutProps {
@@ -17,6 +17,13 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
     { title: "Código Limpo", desc: "Padrões profissionais e manutenível" },
     { title: "Performance", desc: "Web Vitals otimizados" },
     { title: "Suporte 30 dias", desc: "Acompanhamento pós-entrega" }
+  ];
+
+  const differentials = [
+    { icon: Zap, title: "Rápido & Eficiente", color: "text-yellow-500" },
+    { icon: Code2, title: "Código Escalável", color: "text-blue-500" },
+    { icon: BarChart3, title: "Orientado a Resultados", color: "text-green-500" },
+    { icon: Heart, title: "Apaixonado pelo Que Faz", color: "text-red-500" }
   ];
 
   return (
@@ -109,13 +116,17 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
                 Olá! Sou o <span className="font-bold text-gray-900">Philippe Boechat</span>, um desenvolvedor apaixonado por criar interfaces digitais que são <span className="text-primary-600 font-semibold">bonitas, funcionais e acessíveis</span>.
               </p>
               
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 leading-relaxed mb-6">
                 Especializo-me no ecossistema <span className="font-bold">React & TypeScript</span>. Cada projeto é uma oportunidade de entregar código limpo, performático e escalável que adiciona valor real ao negócio.
+              </p>
+
+              <p className="text-base text-gray-500 leading-relaxed">
+                Minha abordagem combina design thinking com boas práticas de engenharia para criar soluções que não apenas resolvem problemas, mas proporcionam excelência na experiência do usuário.
               </p>
             </div>
 
             {/* Highlights Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
               {highlights.map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -134,6 +145,29 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
                   </div>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Differentials Section */}
+            <div className="mb-12 p-6 bg-gradient-to-br from-primary-50 via-white to-primary-50 rounded-2xl border border-primary-200/50">
+              <h4 className="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide">O que me diferencia</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {differentials.map((diff, idx) => {
+                  const Icon = diff.icon;
+                  return (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 5 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.05 }}
+                      className="flex items-center gap-2 p-2"
+                    >
+                      <Icon size={18} className={diff.color} />
+                      <span className="text-xs font-semibold text-gray-700">{diff.title}</span>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* CTA Button */}
