@@ -115,4 +115,8 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
 };
