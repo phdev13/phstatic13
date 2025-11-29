@@ -303,25 +303,21 @@ const CodeTypewriter = () => {
 
 
 // --- Tech Icons ---
-const TechIcon = ({ children, label, color, hoverColor }: { children: React.ReactNode; label: string; color: string; hoverColor: string }) => {
-  const isMobile = useIsMobile();
-  
-  return (
-    <div className={`flex flex-col items-center justify-center gap-3 p-4 group cursor-default relative ${!isMobile ? 'transition-all duration-300 hover:bg-white/50' : ''} rounded-xl`}>
-      {/* Glow Effect - disabled on mobile */}
-      {!isMobile && (
-        <div className={`absolute inset-0 blur-2xl rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} style={{ backgroundColor: color }}></div>
-      )}
-      
-      <div className={`relative z-10 ${!isMobile ? 'transition-all duration-300 group-hover:scale-110' : ''}`} style={{ color: color }}>
-        {children}
-      </div>
-      <span className={`text-sm font-semibold text-gray-500 ${!isMobile ? 'transition-colors duration-300 group-hover:text-gray-900' : ''} text-center`}>
-        {label}
-      </span>
+const TechIcon = ({ children, label, color, hoverColor, isMobile }: { children: React.ReactNode; label: string; color: string; hoverColor: string; isMobile: boolean }) => (
+  <div className={`flex flex-col items-center justify-center gap-3 p-4 group cursor-default relative ${!isMobile ? 'transition-all duration-300 hover:bg-white/50' : ''} rounded-xl`}>
+    {/* Glow Effect - disabled on mobile */}
+    {!isMobile && (
+      <div className={`absolute inset-0 blur-2xl rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} style={{ backgroundColor: color }}></div>
+    )}
+    
+    <div className={`relative z-10 ${!isMobile ? 'transition-all duration-300 group-hover:scale-110' : ''}`} style={{ color: color }}>
+      {children}
     </div>
-  );
-};
+    <span className={`text-sm font-semibold text-gray-500 ${!isMobile ? 'transition-colors duration-300 group-hover:text-gray-900' : ''} text-center`}>
+      {label}
+    </span>
+  </div>
+);
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenChat }) => {
   const [wordIndex, setWordIndex] = useState(0);
@@ -484,22 +480,22 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenChat }) => {
            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto opacity-90">
               
               {/* React - Lucide React */}
-              <TechIcon label="React" color="#61DAFB" hoverColor="#61DAFB">
+              <TechIcon label="React" color="#61DAFB" hoverColor="#61DAFB" isMobile={isMobile}>
                   <Zap size={48} strokeWidth={1.5} />
               </TechIcon>
 
               {/* TypeScript - Lucide React */}
-              <TechIcon label="TypeScript" color="#3178C6" hoverColor="#3178C6">
+              <TechIcon label="TypeScript" color="#3178C6" hoverColor="#3178C6" isMobile={isMobile}>
                   <Code size={48} strokeWidth={1.5} />
               </TechIcon>
 
               {/* Tailwind - Lucide React */}
-              <TechIcon label="Tailwind" color="#38BDF8" hoverColor="#38BDF8">
+              <TechIcon label="Tailwind" color="#38BDF8" hoverColor="#38BDF8" isMobile={isMobile}>
                   <Wind size={48} strokeWidth={1.5} />
               </TechIcon>
 
               {/* Next.js - Lucide React */}
-              <TechIcon label="Next.js" color="#262626" hoverColor="#000000">
+              <TechIcon label="Next.js" color="#262626" hoverColor="#000000" isMobile={isMobile}>
                   <PenTool size={48} strokeWidth={1.5} />
               </TechIcon>
 
