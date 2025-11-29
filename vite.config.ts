@@ -34,11 +34,18 @@ export default defineConfig(({ mode }) => {
         terserOptions: {
           compress: {
             drop_console: true,
+            passes: 2,
+            pure_funcs: ['console.log', 'console.info'],
+          },
+          output: {
+            comments: false,
           },
         },
         // Otimizar chunk size
         chunkSizeWarningLimit: 500,
         sourcemap: false,
+        cssCodeSplit: true,
+        reportCompressedSize: false,
       },
     };
 });

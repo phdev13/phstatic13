@@ -1,23 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+
+let cachedIsMobile: boolean | null = null;
 
 export const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(
+    () => cachedIsMobile !== null ? cachedIsMobile : (typeof window !== 'undefined' ? window.innerWidth < 768 : false)
+  );
+  
+  const resizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const checkMobile = useCallback(() => {
+    const newIsMobile = window.innerWidth < 768; // md breakpoint do Tailwind
+    if (newIsMobile !== cachedIsMobile) {
+      cachedIsMobile = newIsMobile;
+      setIsMobile(newIsMobile);
+    }
+  }, []);
 
   useEffect(() => {
-    // Verifica se é mobile na primeira renderização
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint do Tailwind
-    };
-
     checkMobile();
 
-    // Monitora mudanças de tamanho de tela
-    window.addEventListener('resize', checkMobile);
+    // Debounce resize events para não atualizar a cada pixel
+    const handleResize = () => {
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
+      resizeTimeoutRef.current = setTimeout(checkMobile, 200);
+    };
+
+    window.addEventListener('resize', handleResize, { passive: true });
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('resize', handleResize);
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
     };
-  }, []);
+  }, [checkMobile]);
 
   return isMobile;
 };

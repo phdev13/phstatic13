@@ -6,12 +6,15 @@ import { motion } from 'framer-motion';
 import { Button } from './Button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { ViewType } from '../types';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 interface AboutProps {
   onNavigate: (view: ViewType) => void;
 }
 
 export const About: React.FC<AboutProps> = ({ onNavigate }) => {
+  const isMobile = useIsMobile();
+  
   const highlights = [
     { title: "5+ Anos", desc: "De experiência em desenvolvimento" },
     { title: "Código Limpo", desc: "Padrões profissionais e manutenível" },
@@ -38,7 +41,7 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: isMobile ? 0.3 : 0.6 }}
             className="flex justify-center"
           >
             <div className="w-full max-w-sm">
@@ -53,7 +56,7 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
                     <img 
                       src="https://i.imgur.com/TNMBi27.jpeg" 
                       alt="Philippe Boechat"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className={`w-full h-full object-cover ${!isMobile ? 'group-hover:scale-110' : ''} transition-transform duration-500`}
                     />
                   </div>
                   
@@ -165,13 +168,13 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(124, 58, 237, 0.15)" }}
-                className="group p-5 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-md border border-gray-100 hover:border-primary-300 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-default"
+                whileHover={!isMobile ? { y: -8, boxShadow: "0 20px 40px rgba(124, 58, 237, 0.15)" } : {}}
+                className={`group p-5 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-md border border-gray-100 ${!isMobile ? 'hover:border-primary-300' : ''} flex flex-col items-center justify-center gap-3 ${!isMobile ? 'transition-all duration-300' : ''} cursor-default`}
               >
-                <div className="p-3 bg-gradient-to-br from-gray-100 to-gray-50 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                <div className={`p-3 bg-gradient-to-br from-gray-100 to-gray-50 rounded-lg ${!isMobile ? 'group-hover:scale-110' : ''} transition-transform duration-300`}>
                   <skill.icon size={32} className={skill.color} strokeWidth={1.5} />
                 </div>
-                <span className="font-semibold text-gray-700 text-sm text-center leading-tight group-hover:text-primary-600 transition-colors">
+                <span className={`font-semibold text-gray-700 text-sm text-center leading-tight ${!isMobile ? 'group-hover:text-primary-600' : ''} transition-colors`}>
                   {skill.name}
                 </span>
               </motion.div>

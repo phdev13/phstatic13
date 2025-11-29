@@ -5,6 +5,7 @@ import { Button } from './Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ViewType } from '../types';
 import { InteractiveBackground } from './InteractiveBackground';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 interface HeroProps {
   onNavigate: (view: ViewType) => void;
@@ -294,7 +295,7 @@ const CodeTypewriter = () => {
             
             <div className="whitespace-pre-wrap">
                 {displayedTokens}
-                <span className="inline-block w-2 h-4 bg-primary-400 ml-0.5 align-middle animate-pulse"></span>
+                <span className={`inline-block w-2 h-4 bg-primary-400 ml-0.5 align-middle ${!isMobile ? 'animate-pulse' : ''}`}></span>
             </div>
         </div>
     );
@@ -302,22 +303,44 @@ const CodeTypewriter = () => {
 
 
 // --- Tech Icons ---
-const TechIcon = ({ children, label, color, hoverColor }: { children: React.ReactNode; label: string; color: string; hoverColor: string }) => (
-  <div className="flex flex-col items-center justify-center gap-3 p-4 group cursor-default relative transition-all duration-300 hover:bg-white/50 rounded-xl">
-    {/* Glow Effect */}
-    <div className={`absolute inset-0 blur-2xl rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} style={{ backgroundColor: color }}></div>
-    
-    <div className={`relative z-10 transition-all duration-300 group-hover:scale-110`} style={{ color: color }}>
-      {children}
+const TechIcon = ({ children, label, color, hoverColor }: { children: React.ReactNode; label: string; color: string; hoverColor: string }) => {
+  const isMobile = useIsMobile();
+  
+  return (
+    <div className={`flex flex-col items-center justify-center gap-3 p-4 group cursor-default relative ${!isMobile ? 'transition-all duration-300 hover:bg-white/50' : ''} rounded-xl`}>
+      {/* Glow Effect - disabled on mobile */}
+      {!isMobile && (
+        <div className={`absolute inset-0 blur-2xl rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} style={{ backgroundColor: color }}></div>
+      )}
+      
+      <div className={`relative z-10 ${!isMobile ? 'transition-all duration-300 group-hover:scale-110' : ''}`} style={{ color: color }}>
+        {children}
+      </div>
+      <span className={`text-sm font-semibold text-gray-500 ${!isMobile ? 'transition-colors duration-300 group-hover:text-gray-900' : ''} text-center`}>
+        {label}
+      </span>
     </div>
-    <span className={`text-sm font-semibold text-gray-500 transition-colors duration-300 group-hover:text-gray-900 text-center`}>
-      {label}
-    </span>
-  </div>
-);
+  );
+};
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenChat }) => {
   const [wordIndex, setWordIndex] = useState(0);
+  const isMobile = useIsMobile();
+
+  // Reduce animation complexity on mobile
+  const animationVariants = {
+    container: {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { staggerChildren: isMobile ? 0.05 : 0.1, delayChildren: 0.1 },
+      },
+    },
+    item: {
+      hidden: { opacity: 0, y: isMobile ? 10 : 20 },
+      visible: { opacity: 1, y: 0, transition: { duration: isMobile ? 0.3 : 0.5 } },
+    },
+  };
 
   // Rotate words effect
   useEffect(() => {
@@ -344,7 +367,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenChat }) => {
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold tracking-wide uppercase mb-8 shadow-sm"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                <span className={`${!isMobile ? 'animate-ping' : ''} absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75`}></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
               </span>
               Disponível para novos projetos
