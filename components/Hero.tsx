@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { ArrowRight, MessageSquare, Zap, FileCode, Cpu, Palette, Code, PenTool, Wind, Lightning } from 'lucide-react';
+import { ArrowRight, MessageSquare, Zap, FileCode, Cpu, Palette, Code, PenTool, Wind } from 'lucide-react';
 import { Button } from './Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ViewType } from '../types';
@@ -462,7 +462,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenChat }) => {
               
               {/* React - Lucide React */}
               <TechIcon label="React" color="#61DAFB" hoverColor="#61DAFB">
-                  <Lightning size={40} strokeWidth={1.5} />
+                  <Zap size={40} strokeWidth={1.5} />
               </TechIcon>
 
               {/* TypeScript - Lucide React */}
