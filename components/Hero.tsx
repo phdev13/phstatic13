@@ -303,14 +303,14 @@ const CodeTypewriter = () => {
 
 // --- Tech Icons ---
 const TechIcon = ({ children, label, color, hoverColor }: { children: React.ReactNode; label: string; color: string; hoverColor: string }) => (
-  <div className="flex items-center gap-2 group cursor-default relative">
+  <div className="flex flex-col items-center justify-center gap-3 p-4 group cursor-default relative transition-all duration-300 hover:bg-white/50 rounded-xl">
     {/* Glow Effect */}
-    <div className={`absolute inset-0 blur-lg rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-500`} style={{ backgroundColor: color }}></div>
+    <div className={`absolute inset-0 blur-2xl rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} style={{ backgroundColor: color }}></div>
     
-    <div className={`relative z-10 transition-colors duration-300`} style={{ color: color }}>
+    <div className={`relative z-10 transition-all duration-300 group-hover:scale-110`} style={{ color: color }}>
       {children}
     </div>
-    <span className={`text-sm font-semibold text-gray-400 transition-colors duration-300 hidden sm:block group-hover:text-gray-900`}>
+    <span className={`text-sm font-semibold text-gray-500 transition-colors duration-300 group-hover:text-gray-900 text-center`}>
       {label}
     </span>
   </div>
@@ -458,26 +458,26 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenChat }) => {
            <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-8">
               Stack de Alta Performance
            </p>
-           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-90">
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto opacity-90">
               
               {/* React - Lucide React */}
               <TechIcon label="React" color="#61DAFB" hoverColor="#61DAFB">
-                  <Zap size={40} strokeWidth={1.5} />
+                  <Zap size={48} strokeWidth={1.5} />
               </TechIcon>
 
               {/* TypeScript - Lucide React */}
               <TechIcon label="TypeScript" color="#3178C6" hoverColor="#3178C6">
-                  <Code size={36} strokeWidth={1.5} />
+                  <Code size={48} strokeWidth={1.5} />
               </TechIcon>
 
               {/* Tailwind - Lucide React */}
               <TechIcon label="Tailwind" color="#38BDF8" hoverColor="#38BDF8">
-                  <Wind size={40} strokeWidth={1.5} />
+                  <Wind size={48} strokeWidth={1.5} />
               </TechIcon>
 
               {/* Next.js - Lucide React */}
               <TechIcon label="Next.js" color="#262626" hoverColor="#000000">
-                  <PenTool size={40} strokeWidth={1.5} />
+                  <PenTool size={48} strokeWidth={1.5} />
               </TechIcon>
 
            </div>
