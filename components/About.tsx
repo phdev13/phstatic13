@@ -38,9 +38,9 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
         />
         
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16 items-start">
           
-          {/* LEFT: Photo Card - Smaller & Better */}
+          {/* LEFT: Photo Card - Much Smaller */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -48,44 +48,44 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
             transition={{ duration: 0.6 }}
             className="flex justify-center"
           >
-            <div className="w-full max-w-sm">
+            <div className="w-full max-w-xs">
               {/* Photo Card Container */}
               <div className="group relative">
-                {/* Decorative bg */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-primary-200 via-primary-100 to-transparent rounded-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                {/* Decorative bg - Subtle */}
+                <div className="absolute -inset-2 bg-gradient-to-br from-primary-300 to-primary-200 rounded-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 blur-lg" />
                 
-                {/* Main card */}
-                <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
+                {/* Main card - Compact */}
+                <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg">
                   <div className="aspect-square overflow-hidden">
                     <img 
                       src="https://i.imgur.com/TNMBi27.jpeg" 
                       alt="Philippe Boechat"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   
-                  {/* Overlay info */}
-                  <div className="p-6 bg-gradient-to-t from-primary-900/95 to-primary-900/60 text-white">
-                    <h3 className="text-xl font-bold mb-2">Philippe Boechat</h3>
-                    <p className="text-sm text-primary-100 flex items-center gap-2">
-                      <CheckCircle size={16} />
-                      Frontend Developer & UI Specialist
+                  {/* Overlay info - Compact */}
+                  <div className="p-4 bg-gradient-to-t from-primary-900/90 to-primary-900/50 text-white">
+                    <h3 className="text-lg font-bold mb-1">Philippe</h3>
+                    <p className="text-xs text-primary-100 flex items-center gap-2">
+                      <CheckCircle size={14} />
+                      Frontend Developer
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Stats Cards Below */}
-              <div className="grid grid-cols-2 gap-3 mt-6">
+              {/* Stats Cards Below - Compact */}
+              <div className="grid grid-cols-2 gap-2 mt-4">
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="p-4 bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl border border-primary-200"
+                  className="p-3 bg-gradient-to-br from-primary-50 to-primary-100 rounded-lg border border-primary-200 text-center"
                 >
-                  <p className="text-2xl font-bold text-primary-600">5+</p>
-                  <p className="text-xs text-gray-600 mt-1">Anos de Exp.</p>
+                  <p className="text-xl font-bold text-primary-600">5+</p>
+                  <p className="text-xs text-gray-600 mt-0.5">Anos</p>
                 </motion.div>
                 
                 <motion.div
@@ -93,16 +93,17 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 }}
-                  className="p-4 bg-gradient-to-br from-cyan-50 to-blue-100 rounded-xl border border-blue-200"
+                  className="p-3 bg-gradient-to-br from-cyan-50 to-blue-100 rounded-lg border border-blue-200 text-center"
                 >
-                  <p className="text-2xl font-bold text-blue-600">20+</p>
-                  <p className="text-xs text-gray-600 mt-1">Projetos</p>
+                  <p className="text-xl font-bold text-blue-600">20+</p>
+                  <p className="text-xs text-gray-600 mt-0.5">Projetos</p>
                 </motion.div>
               </div>
             </div>
           </motion.div>
 
-          {/* RIGHT: Content */}
+          {/* RIGHT: Content - Spans 2 columns */}
+          <div className="md:col-span-2">
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -178,7 +179,7 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
             >
               Ver Soluções e Pacotes
             </Button>
-          </motion.div>
+          </div>
         </div>
 
         {/* Tech Stack Section - Full Width */}
