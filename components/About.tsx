@@ -103,20 +103,12 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
           </motion.div>
 
           {/* RIGHT: Content - Spans 2 columns */}
-          <div className="md:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col justify-start"
-            >
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col justify-start"
+            className="md:col-span-2 flex flex-col justify-start"
           >
             {/* Main Content */}
             <div className="mb-10">
@@ -186,8 +178,7 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
             >
               Ver Soluções e Pacotes
             </Button>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Tech Stack Section - Full Width */}
