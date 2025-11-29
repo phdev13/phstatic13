@@ -13,109 +13,134 @@ interface AboutProps {
 
 export const About: React.FC<AboutProps> = ({ onNavigate }) => {
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <SectionTitle 
+          title="Sobre Mim" 
+          alignment="center"
+        />
+        
+        {/* Main Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mt-16">
           
-          {/* Text Content */}
-          <div className="lg:w-1/2">
-            <SectionTitle 
-              title="Sobre Mim" 
-              alignment="left"
-            />
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-6 text-gray-600 text-lg leading-relaxed"
-            >
-              <p>
-                Olá! Sou o PH, um desenvolvedor apaixonado por construir interfaces digitais que não são apenas bonitas, mas funcionais e acessíveis. Com mais de 5 anos de experiência, foco em entregar código limpo e soluções escaláveis.
-              </p>
-              <p>
-                Minha especialidade é o ecossistema <strong>React & TypeScript</strong>. Acredito que a tecnologia deve servir ao propósito do negócio, por isso cada linha de código que escrevo é pensada na performance final e na experiência do usuário.
-              </p>
+          {/* Left: Profile Photo - Smaller & Refined */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-1 flex flex-col items-center"
+          >
+            <div className="relative w-full max-w-xs">
+              {/* Frame styling */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-primary-600/20 rounded-2xl transform translate-x-2 translate-y-2" />
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-primary-200 transition-colors">
-                  <h4 className="font-bold text-gray-900 mb-1">Código Limpo</h4>
-                  <p className="text-sm">Manutenibilidade e padrões da indústria.</p>
-                </div>
-                <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-primary-200 transition-colors">
-                  <h4 className="font-bold text-gray-900 mb-1">Alta Performance</h4>
-                  <p className="text-sm">Core Web Vitals otimizados.</p>
-                </div>
-                <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-primary-200 transition-colors">
-                  <h4 className="font-bold text-gray-900 mb-1">Suporte Garantido</h4>
-                  <p className="text-sm">30 dias de acompanhamento pós-entrega.</p>
-                </div>
-                <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-primary-200 transition-colors">
-                  <h4 className="font-bold text-gray-900 mb-1">Mobile First</h4>
-                  <p className="text-sm">Perfeito em qualquer tamanho de tela.</p>
-                </div>
-              </div>
-
-              <div className="pt-6">
-                <Button 
-                    onClick={() => onNavigate('services')}
-                    rightIcon={<ArrowRight size={18} />}
-                    className="shadow-lg shadow-primary-600/10"
-                >
-                    Ver Soluções e Pacotes
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Image + Skills Column */}
-          <div className="lg:w-1/2 w-full flex flex-col gap-12">
-            {/* Profile Photo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-xl group">
-                {/* Gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-primary-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-0" />
-                
+              {/* Image container */}
+              <div className="relative rounded-2xl overflow-hidden shadow-lg group bg-white">
                 <img 
                   src="https://i.imgur.com/TNMBi27.jpeg" 
                   alt="Philippe Boechat - Desenvolvedor Frontend"
-                  className="w-full h-auto object-cover rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
+                  className="w-full h-auto object-cover aspect-square hover:scale-105 transition-transform duration-300"
                 />
                 
-                {/* Overlay badge */}
-                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                  <p className="text-sm font-semibold text-gray-900">Frontend Developer & UI Specialist</p>
-                </div>
+                {/* Overlay gradient on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+
+              {/* Badge below photo */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="mt-6 p-4 bg-white rounded-xl shadow-md border border-gray-100 text-center"
+              >
+                <p className="text-sm font-semibold text-primary-600 mb-1">Frontend Developer</p>
+                <p className="text-xs text-gray-600">UI/UX Specialist</p>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Right: Content */}
+          <div className="lg:col-span-2 flex flex-col justify-start">
+            {/* Main text content */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6 mb-8"
+            >
+              <div>
+                <p className="text-gray-600 text-base leading-relaxed mb-4">
+                  Olá! Sou o <strong className="text-gray-900">PH</strong>, um desenvolvedor apaixonado por construir interfaces digitais que não são apenas bonitas, mas funcionais e acessíveis.
+                </p>
+                <p className="text-gray-600 text-base leading-relaxed">
+                  Com <strong className="text-primary-600">5+ anos de experiência</strong>, especializo-me em <strong>React & TypeScript</strong>. Cada projeto é uma oportunidade de criar soluções escaláveis e performáticas.
+                </p>
               </div>
             </motion.div>
 
-            {/* Tech Stack */}
+            {/* Highlights Grid - 2x2 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              {[
+                { title: "Código Limpo", desc: "Padrões e manutenibilidade." },
+                { title: "Performance", desc: "Core Web Vitals otimizados." },
+                { title: "30 Dias de Suporte", desc: "Acompanhamento pós-entrega." },
+                { title: "Mobile First", desc: "Responsivo em qualquer tela." }
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="p-4 bg-white rounded-lg shadow-sm border border-gray-100 hover:border-primary-300 hover:shadow-md transition-all duration-300"
+                >
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">{item.title}</h4>
+                  <p className="text-xs text-gray-600">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
             <div>
-              <h3 className="font-display font-bold text-2xl mb-8 text-center lg:text-left">Tech Stack</h3>
-              <div className="grid grid-cols-3 gap-4">
-                {SKILLS.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                    className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-3 transition-shadow hover:shadow-lg"
-                  >
-                    <skill.icon size={40} className={skill.color} strokeWidth={1.5} />
-                    <span className="font-medium text-gray-700 text-sm text-center">{skill.name}</span>
-                  </motion.div>
-                ))}
-              </div>
+              <Button 
+                onClick={() => onNavigate('services')}
+                rightIcon={<ArrowRight size={18} />}
+                className="shadow-lg shadow-primary-600/10"
+              >
+                Ver Soluções e Pacotes
+              </Button>
             </div>
           </div>
         </div>
+
+        {/* Tech Stack Section - Full Width Below */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-20 pt-16 border-t border-gray-200"
+        >
+          <h3 className="font-display font-bold text-2xl mb-10 text-center text-gray-900">Tecnologias que Uso</h3>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+            {SKILLS.map((skill, index) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -8, boxShadow: "0 12px 24px rgba(0,0,0,0.08)" }}
+                className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:border-primary-200"
+              >
+                <skill.icon size={36} className={skill.color} strokeWidth={1.5} />
+                <span className="font-medium text-gray-700 text-xs text-center leading-tight">{skill.name}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
